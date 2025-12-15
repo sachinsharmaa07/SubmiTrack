@@ -11,6 +11,7 @@ const Navbar = ({ user, onLogout }) => {
     onLogout();
     localStorage.removeItem('token');
     navigate('/login');
+    setShowMenu(false);
   };
 
   const isActive = (path) => location.pathname === path;
@@ -18,18 +19,26 @@ const Navbar = ({ user, onLogout }) => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" onClick={() => setShowMenu(false)}>
           <span className="logo-icon">📝</span>
           <span className="logo-text">SubmiTrack</span>
         </Link>
 
-        <button className="menu-toggle" onClick={() => setShowMenu(!showMenu)}>
-          ☰
+        <button 
+          className="menu-toggle" 
+          onClick={() => setShowMenu(!showMenu)}
+          aria-label="Toggle menu"
+        >
+          {showMenu ? '✕' : '☰'}
         </button>
 
         <div className={`navbar-content ${showMenu ? 'active' : ''}`}>
           <div className="navbar-links">
-            <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
+            <Link 
+              to="/" 
+              className={`nav-link ${isActive('/') ? 'active' : ''}`}
+              onClick={() => setShowMenu(false)}
+            >
               📚 Dashboard
             </Link>
           </div>
@@ -45,7 +54,11 @@ const Navbar = ({ user, onLogout }) => {
               </div>
             </div>
 
-            <button onClick={handleLogout} className="logout-btn">
+            <button 
+              onClick={handleLogout} 
+              className="logout-btn"
+              aria-label="Logout"
+            >
               🚪 Logout
             </button>
           </div>

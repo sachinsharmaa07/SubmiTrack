@@ -20,7 +20,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/assignments', require('./routes/assignmentRoutes'));
 app.use('/api/submissions', require('./routes/submissionRoutes'));
 app.use('/api/deadline', require('./routes/deadlineRoutes'));
-app.use('/uploads', express.static('backend/uploads'));
+app.use('/uploads', express.static('uploads'));
 
 // Health Check
 app.get('/api/health', (req, res) => {

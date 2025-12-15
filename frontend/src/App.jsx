@@ -5,9 +5,10 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import CreateAssignment from './pages/CreateAssignment';
 import AssignmentDetail from './pages/AssignmentDetail';
 import SubmissionDetail from './pages/SubmissionDetail';
-import '../styles/App.css';
+import './styles/App.css';
 
 const ProtectedRoute = ({ children, isAuthenticated }) => {
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -39,6 +40,14 @@ const App = () => {
               element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
                   <Dashboard key={refreshTrigger} user={user} onRefresh={() => setRefreshTrigger(t => t + 1)} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/create-assignment"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <CreateAssignment user={user} />
                 </ProtectedRoute>
               }
             />

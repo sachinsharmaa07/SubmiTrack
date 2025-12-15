@@ -1,28 +1,11 @@
 /* Assignment Detail Container */
-.assignment-detail-container {
+.assignment-detail {
   min-height: calc(100vh - 80px);
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: 30px 20px;
 }
 
-.assignment-detail-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  animation: slideIn 0.5s ease;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.back-link {
+.back-button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -30,11 +13,16 @@
   text-decoration: none;
   font-weight: 600;
   margin-bottom: 20px;
+  padding: 10px 15px;
+  border-radius: 8px;
   transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.8);
 }
 
-.back-link:hover {
+.back-button:hover {
+  background: white;
   transform: translateX(-3px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Detail Header */
@@ -42,104 +30,254 @@
   background: white;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   margin-bottom: 20px;
-  border-left: 4px solid #667eea;
+  border-left: 5px solid #667eea;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  animation: slideDown 0.4s ease;
 }
 
-.detail-header h1 {
-  margin: 0 0 15px 0;
-  font-size: 2rem;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.2rem;
   color: #333;
   font-weight: 700;
 }
 
-.detail-meta {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.meta-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.meta-item label {
-  font-size: 0.75rem;
-  color: #999;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.meta-item p {
+.subject-info {
   margin: 0;
-  color: #333;
-  font-size: 0.95rem;
+  color: #667eea;
+  font-size: 1rem;
   font-weight: 500;
 }
 
-.meta-item .deadline-status {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.8rem;
+.marks-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  color: white;
+  min-width: 150px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.marks-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.marks-label {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  text-transform: uppercase;
   font-weight: 600;
-  width: fit-content;
 }
 
-.meta-item .deadline-status.urgent {
-  background: #f8d7da;
-  color: #721c24;
-}
-
-.meta-item .deadline-status.pending {
-  background: #fff3cd;
-  color: #856404;
-}
-
-.meta-item .deadline-status.completed {
-  background: #d4edda;
-  color: #155724;
-}
-
-.detail-description {
+/* Countdown Timer */
+.countdown-timer {
   background: white;
-  padding: 30px;
+  padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
-.detail-description h2 {
-  margin: 0 0 15px 0;
-  font-size: 1.2rem;
-  color: #333;
-  font-weight: 600;
+.countdown-timer.urgent {
+  border-left: 5px solid #e74c3c;
+  background: #fff5f5;
 }
 
-.detail-description p {
-  margin: 0;
+.countdown-timer.warning {
+  border-left: 5px solid #ffa94d;
+  background: #fffbf0;
+}
+
+.countdown-timer.normal {
+  border-left: 5px solid #51cf66;
+  background: #f0fdf4;
+}
+
+.countdown-timer.expired {
+  border-left: 5px solid #999;
+  background: #f5f5f5;
+  opacity: 0.8;
+}
+
+.countdown-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 700;
   color: #666;
-  line-height: 1.8;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.countdown-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 15px 12px;
+  border-radius: 8px;
+  min-width: 70px;
+  border: 2px solid #e0e0e0;
+}
+
+.countdown-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  line-height: 1;
+}
+
+.countdown-unit-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #999;
+  margin-top: 5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.countdown-separator {
+  font-size: 1.5rem;
+  color: #ccc;
+  font-weight: 700;
+  margin: 0 3px;
+}
+
+.expired-message {
+  color: #e74c3c;
+  font-weight: 600;
+  margin-top: 10px;
   font-size: 0.95rem;
 }
 
-/* Upload Section (Student View) */
-.upload-section {
+/* Detail Content */
+.detail-content {
+  display: grid;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.description-section,
+.submission-section,
+.submissions-section {
   background: white;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.description-section h2,
+.submission-section h2,
+.submissions-section h2 {
+  margin: 0 0 15px 0;
+  font-size: 1.3rem;
+  color: #333;
+  font-weight: 700;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 10px;
+}
+
+.description-section p {
+  color: #555;
+  line-height: 1.8;
+  margin: 0 0 15px 0;
+  font-size: 0.95rem;
+}
+
+.instructions {
+  background: #f8f9ff;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  margin: 15px 0;
+}
+
+.instructions h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.instructions p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.deadline-info {
+  background: #fff3cd;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
+  margin-top: 15px;
+}
+
+.deadline-info p {
+  margin: 0;
+  color: #856404;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Submission Section Styles */
+.previous-submission {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 12px 15px;
+  border-radius: 8px;
   margin-bottom: 20px;
 }
 
-.upload-section h2 {
-  margin: 0 0 20px 0;
-  font-size: 1.2rem;
-  color: #333;
-  font-weight: 600;
+.submission-status {
+  margin: 0;
+  color: #155724;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .upload-form {
@@ -161,142 +299,176 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 20px;
+  padding: 30px;
   border: 2px dashed #667eea;
-  border-radius: 8px;
+  border-radius: 10px;
   background: #f8f9ff;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
   color: #667eea;
+  font-size: 0.95rem;
 }
 
 .file-input-label:hover {
   border-color: #764ba2;
   background: #f0f2ff;
   color: #764ba2;
-}
-
-.file-input-label.dragging {
-  border-color: #27ae60;
-  background: #eafdf4;
-  color: #27ae60;
-}
-
-.file-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.file-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 12px;
-  background: #f9f9f9;
-  border-radius: 6px;
-  border: 1px solid #e0e0e0;
-}
-
-.file-item-name {
-  font-size: 0.9rem;
-  color: #333;
-  font-weight: 500;
-}
-
-.file-item-remove {
-  background: #e74c3c;
-  color: white;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  transition: all 0.3s ease;
-}
-
-.file-item-remove:hover {
-  background: #c0392b;
-}
-
-.upload-btn {
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.upload-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-}
-
-.upload-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.upload-success {
-  padding: 12px;
-  background: #d4edda;
-  color: #155724;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border: 1px solid #c3e6cb;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
 }
 
 /* Submissions Section (Teacher View) */
-.submissions-section {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
-.submissions-section h2 {
-  margin: 0 0 20px 0;
-  font-size: 1.2rem;
-  color: #333;
-  font-weight: 600;
-}
-
 .submissions-table {
   width: 100%;
   border-collapse: collapse;
-  overflow-x: auto;
 }
 
-.submissions-table thead {
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;
+  gap: 15px;
+  padding: 15px;
   background: #f9f9f9;
   border-bottom: 2px solid #e0e0e0;
-}
-
-.submissions-table th {
-  padding: 15px;
-  text-align: left;
-  font-weight: 600;
-  color: #333;
+  font-weight: 700;
   font-size: 0.85rem;
   text-transform: uppercase;
-}
-
-.submissions-table td {
-  padding: 15px;
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 0.9rem;
   color: #666;
 }
 
-.submissions-table tbody tr:hover {
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.table-row:hover {
   background: #f9f9f9;
+}
+
+.student-col {
+  color: #333;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.marks-col {
+  text-align: center;
+  font-weight: 600;
+  color: #667eea;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.status-submitted {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-badge.status-late {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-badge.status-graded {
+  background: #d4edda;
+  color: #155724;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 0.95rem;
+}
+
+.empty-state p {
+  margin: 0;
+}
+
+.btn-large {
+  padding: 12px 24px;
+  font-size: 1rem;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+/* Error Container */
+.error-container {
+  background: white;
+  padding: 60px 40px;
+  border-radius: 12px;
+  text-align: center;
+  color: #c33;
+}
+
+.error-container h2 {
+  margin: 0 0 20px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .detail-header {
+    flex-direction: column;
+  }
+
+  .marks-display {
+    width: 100%;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .assignment-detail {
+    padding: 20px 15px;
+  }
+
+  .header-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .countdown-display {
+    flex-wrap: wrap;
+  }
+
+  .countdown-unit {
+    min-width: 60px;
+    padding: 12px 10px;
+  }
+
+  .countdown-value {
+    font-size: 1.4rem;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .description-section,
+  .submission-section,
+  .submissions-section {
+    padding: 20px;
+  }
 }
 
 .student-name {

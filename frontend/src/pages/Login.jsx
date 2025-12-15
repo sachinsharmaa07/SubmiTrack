@@ -17,9 +17,13 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
       await login(email, password);
-      navigate('/');
+      // Wait a moment for auth state to update, then navigate
+      setTimeout(() => {
+        navigate('/');
+      }, 100);
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     }
