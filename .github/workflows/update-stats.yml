@@ -1,0 +1,34 @@
+name: Update README Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Update project statistics
+        run: |
+          # Count commits
+          TOTAL_COMMITS=$(git rev-list --count HEAD)
+          CONTRIBUTORS=$(git log --pretty=format:%an | sort | uniq | wc -l)
+          
+          # Update README with stats (example)
+          echo "Total Commits: $TOTAL_COMMITS"
+          echo "Contributors: $CONTRIBUTORS"
+      
+      - name: Commit and push if changed
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add README.md || true
+          git commit -m "docs: update project statistics" || echo "No changes to commit"
+          git push || echo "No commits to push"
+
