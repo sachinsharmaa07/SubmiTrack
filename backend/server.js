@@ -15,6 +15,15 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('MongoDB connection error:', err));
 
+// Routes
+const authRoutes = require('./routes/authRoutes');
+const assignmentRoutes = require('./routes/assignmentRoutes');
+const submissionRoutes = require('./routes/submissionRoutes');
+app.use('/api/auth', authRoutes);
+app.use('/api/assignments', assignmentRoutes);
+app.use('/api/submissions', submissionRoutes);
+app.use('/uploads', express.static('backend/uploads'));
+
 // Health Check
 app.get('/api/health', (req, res) => {
   res.json({ message: 'SubmiTrack Backend is running', status: 'OK' });
