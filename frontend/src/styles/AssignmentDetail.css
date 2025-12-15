@@ -1,0 +1,439 @@
+/* Assignment Detail Container */
+.assignment-detail-container {
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 30px 20px;
+}
+
+.assignment-detail-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  transform: translateX(-3px);
+}
+
+/* Detail Header */
+.detail-header {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-left: 4px solid #667eea;
+}
+
+.detail-header h1 {
+  margin: 0 0 15px 0;
+  font-size: 2rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.detail-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-item label {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.meta-item p {
+  margin: 0;
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.meta-item .deadline-status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.meta-item .deadline-status.urgent {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.meta-item .deadline-status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.meta-item .deadline-status.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.detail-description {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.detail-description h2 {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.detail-description p {
+  margin: 0;
+  color: #666;
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+/* Upload Section (Student View) */
+.upload-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.upload-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.file-input-wrapper {
+  position: relative;
+}
+
+.file-input-wrapper input[type='file'] {
+  display: none;
+}
+
+.file-input-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  border: 2px dashed #667eea;
+  border-radius: 8px;
+  background: #f8f9ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: #667eea;
+}
+
+.file-input-label:hover {
+  border-color: #764ba2;
+  background: #f0f2ff;
+  color: #764ba2;
+}
+
+.file-input-label.dragging {
+  border-color: #27ae60;
+  background: #eafdf4;
+  color: #27ae60;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.file-item-name {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.file-item-remove {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.file-item-remove:hover {
+  background: #c0392b;
+}
+
+.upload-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.upload-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.upload-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.upload-success {
+  padding: 12px;
+  background: #d4edda;
+  color: #155724;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid #c3e6cb;
+}
+
+/* Submissions Section (Teacher View) */
+.submissions-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.submissions-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.submissions-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.submissions-table thead {
+  background: #f9f9f9;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.submissions-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.submissions-table td {
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.submissions-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.student-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-badge.submitted {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.submission-link {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #667eea;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.submission-link:hover {
+  background: #764ba2;
+}
+
+.no-submissions {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+}
+
+.no-submissions p {
+  margin: 0;
+}
+
+/* Error & Loading States */
+.error-message {
+  padding: 12px 16px;
+  background: #f8d7da;
+  color: #721c24;
+  border-radius: 8px;
+  border: 1px solid #f5c6cb;
+  margin-bottom: 20px;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e0e0e0;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .assignment-detail-container {
+    padding: 20px 10px;
+  }
+
+  .detail-header,
+  .detail-description,
+  .upload-section,
+  .submissions-section {
+    padding: 20px;
+  }
+
+  .detail-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .detail-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .submissions-table {
+    font-size: 0.8rem;
+  }
+
+  .submissions-table th,
+  .submissions-table td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-header,
+  .detail-description,
+  .upload-section,
+  .submissions-section {
+    padding: 15px;
+  }
+
+  .detail-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .detail-description h2,
+  .upload-section h2,
+  .submissions-section h2 {
+    font-size: 1rem;
+  }
+
+  .submissions-table {
+    font-size: 0.75rem;
+  }
+
+  .submissions-table th,
+  .submissions-table td {
+    padding: 8px;
+  }
+
+  .submission-link {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+}

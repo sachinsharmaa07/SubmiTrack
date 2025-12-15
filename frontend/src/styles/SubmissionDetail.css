@@ -1,0 +1,568 @@
+/* Submission Detail Container */
+.submission-detail-container {
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 30px 20px;
+}
+
+.submission-detail-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  transform: translateX(-3px);
+}
+
+/* Submission Header */
+.submission-header {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-left: 4px solid #667eea;
+}
+
+.submission-header h1 {
+  margin: 0 0 15px 0;
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.submission-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-item label {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.meta-item p {
+  margin: 0;
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Student Info Box */
+.student-info-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-left: 4px solid #3498db;
+}
+
+.student-info-box h2 {
+  margin: 0 0 15px 0;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.student-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.student-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-detail label {
+  font-size: 0.8rem;
+  color: #999;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.student-detail p {
+  margin: 0;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* Submitted Files Section */
+.submitted-files-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.submitted-files-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.file-item:hover {
+  border-color: #667eea;
+  background: #f5f7ff;
+}
+
+.file-item-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.file-icon {
+  width: 40px;
+  height: 40px;
+  background: #667eea;
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.file-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.file-meta {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 3px;
+}
+
+.file-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.file-download-btn,
+.file-view-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.file-download-btn {
+  background: #27ae60;
+  color: white;
+}
+
+.file-download-btn:hover {
+  background: #229954;
+  transform: translateY(-2px);
+}
+
+.file-view-btn {
+  background: #3498db;
+  color: white;
+}
+
+.file-view-btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Grading Section (Teacher View) */
+.grading-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-left: 4px solid #f39c12;
+}
+
+.grading-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.grading-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.marks-input {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.marks-input input {
+  flex: 1;
+}
+
+.marks-display {
+  font-size: 0.8rem;
+  color: #999;
+  align-self: flex-end;
+}
+
+.submit-grade-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.submit-grade-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
+}
+
+.submit-grade-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Grade Display (Student View) */
+.grade-display-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-left: 4px solid #27ae60;
+}
+
+.grade-display-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.grade-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.grade-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+.grade-circle-value {
+  font-size: 2rem;
+}
+
+.grade-circle-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.grade-feedback {
+  display: flex;
+  flex-direction: column;
+}
+
+.grade-feedback label {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.grade-feedback p {
+  margin: 0;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.no-grade {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+}
+
+.no-grade p {
+  margin: 0;
+}
+
+/* Success & Error Messages */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Loading State */
+.loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e0e0e0;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .submission-detail-container {
+    padding: 20px 10px;
+  }
+
+  .submission-header,
+  .student-info-box,
+  .submitted-files-section,
+  .grading-section,
+  .grade-display-section {
+    padding: 20px;
+  }
+
+  .submission-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .submission-meta,
+  .student-details {
+    grid-template-columns: 1fr;
+  }
+
+  .file-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .file-actions {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .file-download-btn,
+  .file-view-btn {
+    flex: 1;
+  }
+
+  .grade-card {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .grade-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .grade-circle-value {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .submission-header,
+  .student-info-box,
+  .submitted-files-section,
+  .grading-section,
+  .grade-display-section {
+    padding: 15px;
+  }
+
+  .submission-header h1 {
+    font-size: 1.1rem;
+  }
+
+  .submitted-files-section h2,
+  .grading-section h2,
+  .grade-display-section h2 {
+    font-size: 1rem;
+  }
+
+  .file-item {
+    padding: 12px;
+  }
+
+  .file-details {
+    flex: 1;
+  }
+
+  .grading-form {
+    gap: 12px;
+  }
+
+  .form-group textarea {
+    min-height: 80px;
+  }
+
+  .marks-input {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .marks-input input {
+    width: 100%;
+  }
+
+  .submit-grade-btn {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .grade-circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .grade-circle-value {
+    font-size: 1.2rem;
+  }
+}

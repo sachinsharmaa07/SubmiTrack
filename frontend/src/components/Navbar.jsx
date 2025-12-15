@@ -1,40 +1,54 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../styles/Navbar.css';
 
 const Navbar = ({ user, onLogout }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleLogout = () => {
     onLogout();
+    localStorage.removeItem('token');
     navigate('/login');
   };
+
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          📝 SubmiTrack
+          <span className="logo-icon">📝</span>
+          <span className="logo-text">SubmiTrack</span>
         </Link>
-        <div className="navbar-links">
-          {user ? (
-            <>
-              <span className="user-info">
-                {user.name} ({user.role})
-              </span>
-              {user.role === 'teacher' && (
-                <Link to="/create-assignment">Create Assignment</Link>
-              )}
-              <button onClick={handleLogout} className="logout-btn">
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
-            </>
-          )}
+
+        <button className="menu-toggle" onClick={() => setShowMenu(!showMenu)}>
+          ☰
+        </button>
+
+        <div className={`navbar-content ${showMenu ? 'active' : ''}`}>
+          <div className="navbar-links">
+            <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
+              📚 Dashboard
+            </Link>
+          </div>
+
+          <div className="navbar-user">
+            <div className="user-info">
+              <div className="user-avatar">{user?.name?.charAt(0).toUpperCase()}</div>
+              <div className="user-details">
+                <span className="user-name">{user?.name}</span>
+                <span className="user-role">
+                  {user?.role === 'teacher' ? '🏫 Instructor' : '👨‍🎓 Student'}
+                </span>
+              </div>
+            </div>
+
+            <button onClick={handleLogout} className="logout-btn">
+              🚪 Logout
+            </button>
+          </div>
         </div>
       </div>
     </nav>
