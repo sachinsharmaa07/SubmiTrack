@@ -7,32 +7,51 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [demo, setDemo] = useState(false);
+  const [localLoading, setLocalLoading] = useState(false);
   const navigate = useNavigate();
-  const { login, loading, isAuthenticated } = useAuth();
+  const { login, isAuthenticated } = useAuth();
 
   useEffect(() => {
-    if (isAuthenticated) navigate('/');
+    if (isAuthenticated) {
+      navigate('/', { replace: true });
+    }
   }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      setError('Please enter email and password');
+      return;
+    }
+    
     setError('');
+    setLocalLoading(true);
+    
     try {
       await login(email, password);
-      // Wait a moment for auth state to update, then navigate
-      setTimeout(() => {
-        navigate('/');
-      }, 100);
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      const errorMsg = err.response?.data?.message || err.message || 'Login failed';
+      setError(errorMsg);
+      setLocalLoading(false);
     }
   };
 
-  const useDemoAccount = (role) => {
-    setEmail(role === 'student' ? 'student@test.com' : 'teacher@test.com');
-    setPassword('password123');
-    setDemo(true);
+  const handleDemoLogin = async (role) => {
+    const demoEmail = role === 'student' ? 'student@test.com' : 'teacher@test.com';
+    const demoPassword = 'password123';
+    
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+    setError('');
+    setLocalLoading(true);
+    
+    try {
+      await login(demoEmail, demoPassword);
+    } catch (err) {
+      const errorMsg = err.response?.data?.message || 'Demo login failed';
+      setError(errorMsg);
+      setLocalLoading(false);
+    }
   };
 
   return (
@@ -40,7 +59,7 @@ const Login = () => {
       <div className="auth-wrapper">
         <div className="auth-box">
           <div className="auth-header">
-            <h1>📝 SubmiTrack</h1>
+            <h1>📝 SubmiTrack DevopsS</h1>
             <p>Assignment Submission Portal</p>
           </div>
 
@@ -75,8 +94,8 @@ const Login = () => {
                 />
               </div>
 
-              <button type="submit" disabled={loading} className="btn btn-primary btn-large">
-                {loading ? 'Logging in...' : 'Login'}
+              <button type="submit" disabled={localLoading} className="btn btn-primary btn-large">
+                {localLoading ? 'Logging in...' : 'Login'}
               </button>
             </form>
 
@@ -85,17 +104,17 @@ const Login = () => {
             <div className="demo-buttons">
               <button
                 type="button"
-                onClick={() => { useDemoAccount('student'); handleSubmit({ preventDefault: () => {} }); }}
+                onClick={() => handleDemoLogin('student')}
                 className="btn btn-demo btn-student"
-                disabled={loading}
+                disabled={localLoading}
               >
                 👨‍🎓 Demo Student
               </button>
               <button
                 type="button"
-                onClick={() => { useDemoAccount('teacher'); handleSubmit({ preventDefault: () => {} }); }}
+                onClick={() => handleDemoLogin('teacher')}
                 className="btn btn-demo btn-teacher"
-                disabled={loading}
+                disabled={localLoading}
               >
                 🏫 Demo Teacher
               </button>

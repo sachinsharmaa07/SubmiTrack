@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { assignmentAPI } from '../utils/api';
 import '../styles/Dashboard.css';
 
-const Dashboard = ({ user, onRefresh }) => {
+const Dashboard = ({ user }) => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');

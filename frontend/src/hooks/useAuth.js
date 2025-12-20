@@ -10,19 +10,27 @@ export const useAuth = () => {
   // Initialize auth from localStorage on mount
   useEffect(() => {
     const initializeAuth = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        try {
+      try {
+        const token = localStorage.getItem('token');
+        if (token) {
           const response = await authAPI.getMe();
-          setUser(response.data.user);
-          setIsAuthenticated(true);
-        } catch (err) {
-          localStorage.removeItem('token');
-          setUser(null);
+          if (response.data.user) {
+            setUser(response.data.user);
+            setIsAuthenticated(true);
+          } else {
+            localStorage.removeItem('token');
+            setIsAuthenticated(false);
+          }
+        } else {
           setIsAuthenticated(false);
         }
+      } catch (err) {
+        console.error('Auth initialization error:', err);
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     initializeAuth();

@@ -10,13 +10,20 @@ import AssignmentDetail from './pages/AssignmentDetail';
 import SubmissionDetail from './pages/SubmissionDetail';
 import './styles/App.css';
 
-const ProtectedRoute = ({ children, isAuthenticated }) => {
-  return isAuthenticated ? children : <Navigate to="/login" />;
+const ProtectedRoute = ({ children, isAuthenticated, loading }) => {
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Checking authentication...</p>
+      </div>
+    );
+  }
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
 const App = () => {
   const { user, loading, logout, isAuthenticated } = useAuth();
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   if (loading) {
     return (
@@ -33,20 +40,20 @@ const App = () => {
         {isAuthenticated && <Navbar user={user} onLogout={logout} />}
         <main className="main-content">
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={isAuthenticated ? <Navigate to="/" replace /> : <Login />} />
+            <Route path="/register" element={isAuthenticated ? <Navigate to="/" replace /> : <Register />} />
             <Route
               path="/"
               element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <Dashboard key={refreshTrigger} user={user} onRefresh={() => setRefreshTrigger(t => t + 1)} />
+                <ProtectedRoute isAuthenticated={isAuthenticated} loading={loading}>
+                  <Dashboard user={user} />
                 </ProtectedRoute>
               }
             />
             <Route
               path="/create-assignment"
               element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <ProtectedRoute isAuthenticated={isAuthenticated} loading={loading}>
                   <CreateAssignment user={user} />
                 </ProtectedRoute>
               }
@@ -54,7 +61,7 @@ const App = () => {
             <Route
               path="/assignment/:id"
               element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <ProtectedRoute isAuthenticated={isAuthenticated} loading={loading}>
                   <AssignmentDetail user={user} />
                 </ProtectedRoute>
               }
@@ -62,7 +69,7 @@ const App = () => {
             <Route
               path="/submission/:id"
               element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <ProtectedRoute isAuthenticated={isAuthenticated} loading={loading}>
                   <SubmissionDetail user={user} />
                 </ProtectedRoute>
               }

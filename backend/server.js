@@ -11,33 +11,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection
-//mongoose.connect(process.env.MONGODB_URI)
-  //.then(() => console.log('MongoDB connected'))
- // .catch(err => console.log('MongoDB connection error:', err));
- let isConnected = false;
- async function connectToDatabase() {
-   if (isConnected) {
-     console.log('MongoDB already connected');
-     return;
-   }
-   try {
-     await mongoose.connect(process.env.MONGODB_URI, {
-       useNewUrlParser: true,
-       useUnifiedTopology: true,
-     });
-     isConnected = true;
-     console.log('MongoDB connected');
-   } catch (err) {
-     console.log('MongoDB connection error:', err);
-   }
- }
- app.use((req, res, next) => {
-   if (!isConnected) {
-    connectToDatabase();
-   }
-   next();
- });
-
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('MongoDB connected successfully'))
+  .catch(err => console.error('MongoDB connection error:', err.message));
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
@@ -51,9 +30,9 @@ app.get('/api/health', (req, res) => {
   res.json({ message: 'SubmiTrack Backend is running', status: 'OK' });
 });
 
-//const PORT = process.env.PORT || 5000;
-//app.listen(PORT, () => {
-  //console.log(`SubmiTrack Backend Server running on port ${PORT}`);
-//});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`SubmiTrack Backend Server running on port ${PORT}`);
+});
 
 module.exports = app;

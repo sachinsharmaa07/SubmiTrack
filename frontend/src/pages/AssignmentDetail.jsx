@@ -87,21 +87,9 @@ const AssignmentDetail = ({ user }) => {
       const assignRes = await assignmentAPI.getById(id);
       setAssignment(assignRes.data.assignment);
 
-      if (user?.role === 'teacher') {
-        const subRes = await submissionAPI.getByAssignment(id);
-        setSubmissions(subRes.data.submissions || []);
-      } else {
-        // Student only sees their own submission for this assignment
-        try {
-          const subRes = await submissionAPI.getByAssignment(id);
-          // Filter for current student
-          const studentSubmissions = subRes.data.submissions?.filter(s => s.studentId?._id === user?.id) || [];
-          setSubmissions(studentSubmissions);
-        } catch (err) {
-          // If student can't access teacher endpoint, use alternative
-          setSubmissions([]);
-        }
-      }
+      // All users can fetch submissions for an assignment
+      const subRes = await submissionAPI.getByAssignment(id);
+      setSubmissions(subRes.data.submissions || []);
     } catch (err) {
       setError('Failed to load assignment');
       console.error(err);
@@ -127,10 +115,14 @@ const AssignmentDetail = ({ user }) => {
       await submissionAPI.upload(id, file);
       setSuccessMsg('✅ File uploaded successfully!');
       setFile(null);
-      setTimeout(() => {
+      
+      // Refresh data and navigate
+      setTimeout(async () => {
         setSuccessMsg('');
-        fetchData();
-      }, 2000);
+        await fetchData();
+        // Navigate back to dashboard after successful submission
+        navigate('/', { replace: true });
+      }, 1500);
     } catch (err) {
       setError(err.response?.data?.message || 'Upload failed');
     } finally {
@@ -196,9 +188,23 @@ const AssignmentDetail = ({ user }) => {
             <h2>📤 Submit Your Assignment</h2>
             {submissions.length > 0 && (
               <div className="previous-submission">
-                <p className="submission-status">
-                  ✅ You have already submitted. You can resubmit to update your file.
-                </p>
+                <div className="submission-status-card">
+                  <h3>✅ Submission Status</h3>
+                  {submissions.map(sub => (
+                    <div key={sub._id} className="status-details">
+                      <p><strong>Status:</strong> <span className={`status-badge status-${sub.status}`}>{sub.status.toUpperCase()}</span></p>
+                      <p><strong>Submitted:</strong> {new Date(sub.submittedAt).toLocaleString()}</p>
+                      <p><strong>Timing:</strong> {sub.isLate ? '⚠️ Late' : '✅ On Time'}</p>
+                      {sub.marks !== undefined && sub.marks !== null && (
+                        <p><strong>Grade:</strong> {sub.marks}/{assignment.maxMarks}</p>
+                      )}
+                      <a href={`http://localhost:4000${sub.fileUrl}`} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-small">
+                        📥 Download
+                      </a>
+                    </div>
+                  ))}
+                  <p className="resubmit-info">You can resubmit to update your file.</p>
+                </div>
               </div>
             )}
             <form onSubmit={handleSubmit} className="upload-form">
@@ -237,6 +243,7 @@ const AssignmentDetail = ({ user }) => {
               <div className="submissions-table">
                 <div className="table-header">
                   <div>Student</div>
+                  <div>Email</div>
                   <div>Status</div>
                   <div>Submitted At</div>
                   <div>Marks</div>
@@ -245,9 +252,10 @@ const AssignmentDetail = ({ user }) => {
                 {submissions.map(sub => (
                   <div key={sub._id} className="table-row">
                     <div className="student-col">{sub.studentId?.name || 'Unknown'}</div>
+                    <div className="email-col">{sub.studentId?.email || 'N/A'}</div>
                     <div>
                       <span className={`status-badge status-${sub.status}`}>
-                        {sub.isLate ? '⚠️ ' : '✅ '}{sub.status.toUpperCase()}
+                        {sub.isLate ? '⚠️ LATE' : '✅ '}{sub.status.toUpperCase()}
                       </span>
                     </div>
                     <div>{new Date(sub.submittedAt).toLocaleDateString()}</div>

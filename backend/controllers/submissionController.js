@@ -31,8 +31,17 @@ exports.uploadSubmission = async (req, res) => {
 
 exports.getAssignmentSubmissions = async (req, res) => {
   try {
-    const submissions = await Submission.find({ assignmentId: req.params.assignmentId }).populate('studentId', 'name email').populate('gradedBy', 'name');
-    res.status(200).json({ count: submissions.length, submissions });
+    const submissions = await Submission.find({ assignmentId: req.params.assignmentId })
+      .populate('studentId', 'name email')
+      .populate('gradedBy', 'name');
+    
+    // If student, only return their own submissions
+    let filteredSubmissions = submissions;
+    if (req.user.role === 'student') {
+      filteredSubmissions = submissions.filter(s => s.studentId._id.toString() === req.user.id);
+    }
+    
+    res.status(200).json({ count: filteredSubmissions.length, submissions: filteredSubmissions });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

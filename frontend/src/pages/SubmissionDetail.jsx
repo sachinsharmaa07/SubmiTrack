@@ -130,7 +130,7 @@ const SubmissionDetail = ({ user }) => {
           </div>
           <div className="file-download-section">
             <a 
-              href={submission.fileUrl} 
+              href={`http://localhost:4000${submission.fileUrl}`}
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn btn-secondary btn-large"
